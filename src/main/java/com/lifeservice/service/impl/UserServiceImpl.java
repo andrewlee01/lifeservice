@@ -36,6 +36,12 @@ public class UserServiceImpl implements UserService {
 		
 		return userMapper.selectByUserId(userId);
 	}
+
+	@Override
+	public String updateUser(int userId, String key, String value) {
+		userMapper.updateUser(userId, key, value);
+		return "success";
+	}
 	
 	
 

@@ -26,4 +26,14 @@ public interface UserService {
 	 * @return
 	 */
 	public UserInfo findUserByUserId(int userId);
+	
+	/**
+	 * 根据userId更新UserInfo
+	 * @param userId
+	 * @param key 
+	 * 	字段名
+	 * @param value
+	 *  更新的值
+	 */
+	public String updateUser(int userId, String key, String value);
 }

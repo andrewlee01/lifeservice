@@ -56,6 +56,24 @@
 		#{city,jdbcType=VARCHAR})
 		#{memo,jdbcType=VARCHAR})
 	</insert>
+	
+	<update id="updateUser" >
+		update userinfo
+		<set>
+<!-- 			<if test="username != null"> -->
+<!-- 				username = #{username,jdbcType=VARCHAR}, -->
+<!-- 			</if> -->
+<!-- 			<if test="password != null"> -->
+<!-- 				password = #{password,jdbcType=VARCHAR}, -->
+<!-- 			</if> -->
+<!-- 			<if test="age != null"> -->
+<!-- 				age = #{age,jdbcType=INTEGER}, -->
+<!-- 			</if> -->
+				${key} = #{value}
+		</set>
+		where userId = #{userId}
+	</update>
+	
 <!-- 	<insert id="insertSelective" parameterType="com.lifeservice.model.User"> -->
 <!-- 		insert into user -->
 <!-- 		<trim prefix="(" suffix=")" suffixOverrides=","> -->

@@ -1,5 +1,8 @@
 package com.lifeservice.utils;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -90,5 +93,29 @@ public class UtilMethods {
 	public static Date stringToDate(String str) throws ParseException{
 		SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sFormat.parse(str);
+	}
+	
+	/**
+	 * 关闭文件流
+	 * @param fos
+	 * @param fis
+	 */
+	public static void close(FileOutputStream fos, FileInputStream fis) {
+		if (fis != null) {
+			try {
+				fis.close();
+				fis = null;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (fos != null) {
+			try {
+				fos.close();
+				fis = null;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

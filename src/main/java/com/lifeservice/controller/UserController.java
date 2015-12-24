@@ -1,16 +1,24 @@
 package com.lifeservice.controller;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.lifeservice.model.UserImage;
 import com.lifeservice.model.UserInfo;
 import com.lifeservice.service.UserService;
+import com.lifeservice.utils.UtilMethods;
 
 @Controller
 @RequestMapping("/user")
@@ -26,35 +34,6 @@ public class UserController {
 		this.userService = userService;
 	}
 
-
-//	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//	public @ResponseBody
-//	User showOneUser(@PathVariable("id") int id) {
-//
-//		return userService.getUserById(id);
-//	}
-	
-//	@RequestMapping(value = "/test", method = RequestMethod.GET)
-//	public @ResponseBody
-//	String test(){
-//		return "test";
-//		
-//	}
-	
-//	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
-//	public @ResponseBody User getUserById(HttpServletRequest request){
-//		String id = request.getParameter("id");
-//		System.out.println(id);
-//		return userService.getUserById(Integer.parseInt(id));
-//		
-//	}
-	
-//	@RequestMapping(value = "/findtest", method = RequestMethod.GET)
-//	public @ResponseBody
-//	String findtest() {
-//
-//		return "findtest";
-//	}
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> addUser(UserInfo userinfo){
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -88,4 +67,44 @@ public class UserController {
 		return result;
 		
 	}
+	
+	@RequestMapping(value = "/updateUser", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Map<String, Object> updateUser(int userId,String key,String value){
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", userService.updateUser(userId, key, value));
+		return result;
+		
+	}
+	
+	@RequestMapping(value = "/uploadPic", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Map<String, Object> uploadPic(HttpServletRequest request,UserImage userImage,int userId){
+		Map<String, Object> result = new HashMap<String, Object>();
+		ServletRequestAttributes attr = (ServletRequestAttributes) 
+                RequestContextHolder.currentRequestAttributes(); 
+        request = attr.getRequest();
+		FileOutputStream fos = null;
+		FileInputStream fis = null;
+		try {
+			if (!(new java.io.File(userImage.getSavePath()).isDirectory())) {
+				new java.io.File(userImage.getSavePath()).mkdir();
+			}
+			fos = new FileOutputStream(userImage.getSavePath() + "/" + userImage.getImageFileName());
+			fis = new FileInputStream(userImage.getImage());
+			byte[] buffer = new byte[1024];
+			int len = 0;
+			while ((len = fis.read(buffer)) != -1) {
+				fos.write(buffer, 0, len);
+			}
+			userService.updateUser(userId, "memo", userImage.getImageFileName());
+			result.put("result", "success");
+		} catch (Exception e) {
+			result.put("result", "fail");
+			e.printStackTrace();
+		} finally {
+			UtilMethods.close(fos, fis);
+		}
+		return result;
+		
+	}
+	
 }
