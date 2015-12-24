@@ -78,23 +78,30 @@ public class UserController {
 	
 	@RequestMapping(value = "/uploadPic", method = { RequestMethod.POST, RequestMethod.GET })
 	public @ResponseBody Map<String, Object> uploadPic(HttpServletRequest request,UserImage userImage,int userId){
+		
 		Map<String, Object> result = new HashMap<String, Object>();
 		ServletRequestAttributes attr = (ServletRequestAttributes) 
                 RequestContextHolder.currentRequestAttributes(); 
         request = attr.getRequest();
 		FileOutputStream fos = null;
 		FileInputStream fis = null;
+		
 		try {
+			
 			if (!(new java.io.File(userImage.getSavePath()).isDirectory())) {
 				new java.io.File(userImage.getSavePath()).mkdir();
 			}
+			
 			fos = new FileOutputStream(userImage.getSavePath() + "/" + userImage.getImageFileName());
 			fis = new FileInputStream(userImage.getImage());
+			
 			byte[] buffer = new byte[1024];
 			int len = 0;
+			
 			while ((len = fis.read(buffer)) != -1) {
 				fos.write(buffer, 0, len);
 			}
+			
 			userService.updateUser(userId, "memo", userImage.getImageFileName());
 			result.put("result", "success");
 		} catch (Exception e) {
@@ -104,7 +111,40 @@ public class UserController {
 			UtilMethods.close(fos, fis);
 		}
 		return result;
-		
 	}
 	
+	@RequestMapping(value = "/userLogin", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Map<String, Object> userLogin(String userName, String userPassword){
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		if (userName != null && userPassword != null) {
+			
+			UserInfo userInfo = userService.findUserByUsername(userName);
+			
+			if (userInfo != null) {
+				
+				if (userInfo.getUserPassword().equals(userPassword)) {
+					result.put("result", "success");
+					result.put("userId", userInfo.getUserId());
+				} 
+				else {
+					result.put("result", "fail");
+					result.put("reason", "2");
+				}
+				
+			} 
+			else {
+				result.put("result", "fail");
+				result.put("reason", "1");
+			}
+			
+		} 
+		else {
+			result.put("result", "fail");
+			result.put("reason", "0");
+		}
+		
+		return result;
+	}
 }
