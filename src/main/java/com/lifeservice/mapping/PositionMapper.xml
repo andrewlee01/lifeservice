@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lifeservice.dao.PositionMapper">
+	 <cache readOnly="true"/>
+    
+	<resultMap id="BaseResultMap" type="com.lifeservice.model.PositionInfo">
+		<id column="positionId" property="positionId" jdbcType="INTEGER" />
+		<result column="userId" property="userId" jdbcType="INTEGER" />
+		<result column="jingDu" property="jingDu" jdbcType="FLOAT" />
+		<result column="weiDu" property="phone" jdbcType="FLOAT" />
+		<result column="updateTime" property="updateTime" jdbcType="DATE" />
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="memo" property="memo" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		positionId, userId, jingDu, weiDu, updateTime, province, city, memo
+	</sql>
+	
+	<select id="findPositionByUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from position
+		where userId = #{userId,jdbcType=INTEGER}
+	</select>
+	
+	<update id="updateUser" parameterType="com.lifeservice.model.PositionInfo">
+		update position
+		<set>
+				<if test = "userId != null">
+					userId = #{userId,jdbcType=INTEGER}
+				</if>
+				<if test = "jingDu != null">
+					jingDu = #{jingDu,jdbcType=FLOAT}
+				</if>
+				<if test = "weiDu != null">
+					weiDu = #{weiDu,jdbcType=FLOAT}
+				</if>
+				<if test = "updateTime != null">
+					updateTime = #{updateTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test = "province != null">
+					province = #{province,jdbcType=VARCHAR}
+				</if>
+				<if test = "city != null">
+					city = #{city,jdbcType=VARCHAR}
+				</if>
+				<if test = "memo != null">
+					memo = #{memo,jdbcType=VARCHAR}
+				</if>
+		</set>
+		where positionId = #{positionId, jdbcType=INTEGER}
+	</update>
+	
+	<select id="getPositionByCity" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from position
+		where city = #{city,jdbcType=VARCHAR}
+	</select>
+	
+
+
+</mapper>
