@@ -1,21 +1,16 @@
 package com.lifeservice.dao;
 
-import java.util.List;
 
-import com.lifeservice.model.User;
+import com.lifeservice.model.UserInfo;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+//    int deleteByPrimaryKey(Integer id);
+//
+	int insert(UserInfo userInfo);
+//
+//    int insertSelective(User record);
+//
+    UserInfo selectByUserName(String userName);
     
-    List<User> getAll();
+    UserInfo selectByUserId(int userId);
 }

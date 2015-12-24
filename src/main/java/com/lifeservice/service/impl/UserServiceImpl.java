@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lifeservice.dao.UserMapper;
-import com.lifeservice.model.User;
+import com.lifeservice.model.UserInfo;
 import com.lifeservice.service.UserService;
 
 @Service("userService")
@@ -20,14 +20,24 @@ public class UserServiceImpl implements UserService {
 		this.userMapper = userMapper;
 	}
 
-	public User getUserById(int id) {
-		return userMapper.selectByPrimaryKey(id);
+	@Override
+	public int addUser(UserInfo userInfo) {
+		return userMapper.insert(userInfo);
 	}
 
-	public void saveUser(User user) {
-		userMapper.insert(user);
-//		抛出运行时异常，sql会自动rollback
-//		throw new RuntimeException();
+	@Override
+	public UserInfo findUserByUsername(String userName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public UserInfo findUserByUserId(int userId) {
+		
+		return userMapper.selectByUserId(userId);
+	}
+	
+	
+
 
 }
