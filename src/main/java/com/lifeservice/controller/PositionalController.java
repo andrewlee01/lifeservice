@@ -64,7 +64,7 @@ public class PositionalController {
 		List<Nearby> nearByList = new ArrayList<Nearby>();
 		
 		
-		List disList = new ArrayList();
+		List<Double> disList = new ArrayList<Double>();
 		
 		if(positionalList == null || positionalList.size() == 0){
 			result.put("nearby", "fail");
