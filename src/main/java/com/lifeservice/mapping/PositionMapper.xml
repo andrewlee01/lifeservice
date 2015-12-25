@@ -62,6 +62,15 @@
 		where city = #{city,jdbcType=VARCHAR}
 	</select>
 	
-
+	<insert id="savePosition" parameterType="com.lifeservice.model.PositionInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into position (userId, jingDu, weiDu, updateTime, province, city, memo)
+		values (#{userId,jdbcType=INTEGER},
+		#{jingDu,jdbcType=FLOAT},
+		#{weiDu,jdbcType=FLOAT})
+		#{updateTime,jdbcType=TIMESTAMP})
+		#{province,jdbcType=VARCHAR})
+		#{city,jdbcType=VARCHAR})
+		#{memo,jdbcType=VARCHAR})
+	</insert>
 
 </mapper>

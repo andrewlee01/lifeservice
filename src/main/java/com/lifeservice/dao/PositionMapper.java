@@ -12,4 +12,6 @@ public interface PositionMapper {
 	void updatePositional(PositionInfo positionInfo);
 	
 	List<PositionInfo> getPositionByCity(String city);
+	
+	int savePosition(PositionInfo positionInfo);
 }

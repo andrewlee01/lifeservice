@@ -4,24 +4,26 @@ import java.util.Date;
 
 public class PositionInfo {
 	
-	private String positionId;
-	private String userId;
+	private int positionId;
+	private int userId;
 	private float jingDu;
 	private float weiDu;
 	private Date updateTime;
 	private String province;
 	private String city;
 	private String memo;
-	public String getPositionId() {
+	
+	
+	public int getPositionId() {
 		return positionId;
 	}
-	public void setPositionId(String positionId) {
+	public void setPositionId(int positionId) {
 		this.positionId = positionId;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public float getJingDu() {
