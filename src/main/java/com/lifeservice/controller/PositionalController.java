@@ -60,7 +60,6 @@ public class PositionalController {
 		
 		List<PositionInfo> positionalList = positionService.getPositionByCity(city);
 		List<PositionInfo> nearbyPositionList = new ArrayList<PositionInfo>();
-		
 		List<Nearby> nearByList = new ArrayList<Nearby>();
 		
 		
