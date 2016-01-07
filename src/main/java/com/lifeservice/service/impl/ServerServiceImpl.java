@@ -22,11 +22,24 @@ public class ServerServiceImpl implements ServerService{
 	}
 
 	@Override
+	public void addServer(Server server) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public void deleteServerByUserId(int userId) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
+	@Override
+	public void updateServer(Server server) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	@Override
 	public List<Server> findServerListByUserId(int userId) {
 		// TODO Auto-generated method stub
@@ -34,9 +47,17 @@ public class ServerServiceImpl implements ServerService{
 	}
 
 	@Override
+	public List<Server> findServerListByUserIdAndStatus(int userId, int status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public void updateServerStatus(int serverId, int status) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

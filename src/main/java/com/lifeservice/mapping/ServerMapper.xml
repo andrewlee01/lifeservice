@@ -43,6 +43,16 @@
 		where userId = #{userId,jdbcType=INTEGER}
 	</select>
 	
+	<select id="findServerListByUserIdAndStatus"
+		parameterType="java.lang.Integer">
+		select 
+		<include refid="Base_Column_List" />
+		from server
+		where userId = #{userId,jdbcType=INTEGER} 
+		and
+		memo = #{memo,jdbcType=INTEGER}
+	</select>
+	
 	<update id="updateServerStatus" parameterType="java.lang.Integer">
 		update server
 		<set>

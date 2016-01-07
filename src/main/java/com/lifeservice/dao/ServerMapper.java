@@ -29,12 +29,21 @@ public interface ServerMapper {
 	List<Server> findServerListByUserId(int userId);
 	
 	/**
+	 * 根据UserId和服务状态获取服务
+	 * @param userId
+	 * @param status
+	 * @return
+	 */
+	List<Server> findServerListByUserIdAndStatus(int userId,@Param("memo")int status);
+	
+	/**
 	 * 根据服务ID更新服务状态
 	 * @param serverId
 	 * @param status
 	 * 	 0 无效 ，1 有效
 	 */
 	void updateServerStatus(int serverId, @Param("memo")int status);
+	
 	
 	
 
