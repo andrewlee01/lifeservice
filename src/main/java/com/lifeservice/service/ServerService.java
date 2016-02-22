@@ -24,4 +24,6 @@ public interface ServerService {
 	
 	void updateServerStatus(int serverId, int status);
 	
+	void deleteServer(int serverId);
+	
 }

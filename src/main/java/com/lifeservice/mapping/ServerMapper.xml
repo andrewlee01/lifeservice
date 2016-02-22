@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lifeservice.dao.ServerMapper">
-	
-	<cache readOnly="true"/>
-    
+
+	<cache readOnly="true" />
+
 	<resultMap id="BaseResultMap" type="com.lifeservice.model.Server">
 		<id column="serverId" property="serverId" jdbcType="INTEGER" />
 		<result column="userId" property="userId" jdbcType="INTEGER" />
 		<result column="serverName" property="serverName" jdbcType="VARCHAR" />
-		<result column="serverContent" property="serverContent" jdbcType="VARCHAR" />
+		<result column="serverContent" property="serverContent"
+			jdbcType="VARCHAR" />
 		<result column="type" property="type" jdbcType="VARCHAR" />
 		<result column="keyWord" property="keyWord" jdbcType="VARCHAR" />
 		<result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
@@ -18,41 +19,55 @@
 		<result column="city" property="city" jdbcType="VARCHAR" />
 		<result column="memo" property="memo" jdbcType="VARCHAR" />
 	</resultMap>
-	
+
 	<sql id="Base_Column_List">
-		serverId, userId, serverName, serverContent, type, keyWord, updateTime, jingDu, weiDu, province, city, memo
+		serverId, userId, serverName, serverContent, type, keyWord,
+		updateTime, jingDu, weiDu, province, city, memo
 	</sql>
 	
-	<select id="selectById" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
+	<insert id="addServer" parameterType="com.lifeservice.model.Server" useGeneratedKeys="true" keyProperty="id">
+		insert into server (<include refid="Base_Column_List" />)
+		values (#{userId,jdbcType=INTEGER},
+		#{serverName,jdbcType=VARCHAR},
+		#{serverContent,jdbcType=VARCHAR})
+		#{type,jdbcType=VARCHAR})
+		#{keyWord,jdbcType=VARCHAR})
+		#{updateTime,jdbcType=TIMESTAMP})
+		#{jingDu,jdbcType=FLOAT})
+		#{weiDu,jdbcType=FLOAT})
+		#{province,jdbcType=VARCHAR})
+		#{city,jdbcType=VARCHAR})
+		#{memo,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
 		from server
 		where serverId = #{serverId,jdbcType=INTEGER}
 	</select>
-	
+
 	<delete id="deleteServerByUserId" parameterType="java.lang.Integer">
-        delete from server where userId=#{userId,jdbcType=INTEGER}
-    </delete>
-	
+		delete from server where userId=#{userId,jdbcType=INTEGER}
+	</delete>
+
 	<select id="findServerListByUserId" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
-		select 
+		select
 		<include refid="Base_Column_List" />
 		from server
 		where userId = #{userId,jdbcType=INTEGER}
 	</select>
-	
-	<select id="findServerListByUserIdAndStatus"
-		parameterType="java.lang.Integer">
-		select 
+
+	<select id="findServerListByUserIdAndStatus" parameterType="java.lang.Integer">
+		select
 		<include refid="Base_Column_List" />
 		from server
-		where userId = #{userId,jdbcType=INTEGER} 
+		where userId = #{userId,jdbcType=INTEGER}
 		and
 		memo = #{memo,jdbcType=INTEGER}
 	</select>
-	
+
 	<update id="updateServerStatus" parameterType="java.lang.Integer">
 		update server
 		<set>
@@ -60,6 +75,31 @@
 		</set>
 		where serverId = #{serverId,jdbcType=INTEGER}
 	</update>
+
+	<delete id="deleteServer" parameterType="java.lang.Integer">
+		delete from server
+		where serverId =
+		#{serverId,jdbcType=INTEGER}
+	</delete>
 	
-	
+	<update id="updateServer" parameterType="com.lifeservice.model.Server">
+		update server
+		<set>
+			<include refid="Base_Column_List" />
+		</set>
+		where #{userId,jdbcType=INTEGER},
+		#{serverName,jdbcType=VARCHAR},
+		#{serverContent,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{keyWord,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{jingDu,jdbcType=FLOAT},
+		#{weiDu,jdbcType=FLOAT},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{memo,jdbcType=VARCHAR}
+	</update>
+
+
+
 </mapper>

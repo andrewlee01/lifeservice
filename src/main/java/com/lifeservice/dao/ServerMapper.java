@@ -9,6 +9,12 @@ import com.lifeservice.model.Server;
 public interface ServerMapper {
 	
 	/**
+	 * 添加服务
+	 * @param server
+	 */
+	void addServer(Server server);
+	
+	/**
 	 * 根据服务ID获取服务对象
 	 * @param serverId
 	 * @return
@@ -44,7 +50,17 @@ public interface ServerMapper {
 	 */
 	void updateServerStatus(int serverId, @Param("memo")int status);
 	
+	/**
+	 * 更新服务内容
+	 * @param server
+	 */
+	void updateServer(Server server);
 	
+	/**
+	 * 根据服务Id删除服务
+	 * @param serverId
+	 */
+	void deleteServer(int serverId);
 	
 
 }

@@ -94,8 +94,14 @@ public class ServerController {
 	
 	@RequestMapping(value = "/deleteServer", method = { RequestMethod.POST, RequestMethod.GET })
 	public @ResponseBody Map<String, Object> deleteServer(int serverId){
+		try {
+			serverService.deleteServer(serverId);
+			result.put("result", "success");
+		} catch (Exception e) {
+			result.put("result", "fail");
+			e.printStackTrace();
+		}
 		return result;
-		
 	}
 	
 }

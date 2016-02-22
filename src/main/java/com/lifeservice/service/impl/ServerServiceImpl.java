@@ -17,45 +17,43 @@ public class ServerServiceImpl implements ServerService{
 	
 	@Override
 	public Server selectServerById(int serverId) {
-		// TODO Auto-generated method stub
-		return null;
+		return ServerMapper.selectById(serverId);
 	}
 
 	@Override
 	public void addServer(Server server) {
-		// TODO Auto-generated method stub
-		
+		ServerMapper.addServer(server);
 	}
 	
 	@Override
 	public void deleteServerByUserId(int userId) {
-		// TODO Auto-generated method stub
-		
+		ServerMapper.deleteServerByUserId(userId);
 	}
 
 
 	@Override
 	public void updateServer(Server server) {
-		// TODO Auto-generated method stub
-		
+		ServerMapper.updateServer(server);
 	}
 	
 	@Override
 	public List<Server> findServerListByUserId(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return ServerMapper.findServerListByUserId(userId);
 	}
 
 	@Override
 	public List<Server> findServerListByUserIdAndStatus(int userId, int status) {
-		// TODO Auto-generated method stub
-		return null;
+		return ServerMapper.findServerListByUserIdAndStatus(userId, status);
 	}
 	
 	@Override
 	public void updateServerStatus(int serverId, int status) {
-		// TODO Auto-generated method stub
-		
+		ServerMapper.updateServerStatus(serverId, status);
+	}
+
+	@Override
+	public void deleteServer(int serverId) {
+		ServerMapper.deleteServer(serverId);
 	}
 
 
