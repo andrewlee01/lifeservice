@@ -1,5 +1,6 @@
 package com.lifeservice.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -61,6 +62,13 @@ public interface ServerMapper {
 	 * @param serverId
 	 */
 	void deleteServer(int serverId);
+	
+	/**
+	 * 根据关键字搜索服务列表
+	 * @param keyWordList
+	 * @return
+	 */
+	List<Server> searchServer(@Param("sql")String sql);
 	
 
 }

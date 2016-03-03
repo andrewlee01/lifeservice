@@ -26,4 +26,6 @@ public interface ServerService {
 	
 	void deleteServer(int serverId);
 	
+	List<Server> searchServer(String keyWord);
+	
 }

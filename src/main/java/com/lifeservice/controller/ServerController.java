@@ -104,4 +104,21 @@ public class ServerController {
 		return result;
 	}
 	
+
+	@RequestMapping(value = "/searchServer", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Map<String, Object> searchServer(String keyWord){
+		
+		try {
+			List<Server> serverList = serverService.searchServer(keyWord);
+			result.put("result", "success");
+			result.put("serverList", serverList);
+		} catch (Exception e) {
+			result.put("result", "fail");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
 }

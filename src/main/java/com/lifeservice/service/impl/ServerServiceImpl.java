@@ -1,5 +1,6 @@
 package com.lifeservice.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lifeservice.dao.ServerMapper;
 import com.lifeservice.model.Server;
 import com.lifeservice.service.ServerService;
+import com.lifeservice.utils.UtilMethods;
 
 @Service("serverService")
 public class ServerServiceImpl implements ServerService{
@@ -56,6 +58,16 @@ public class ServerServiceImpl implements ServerService{
 		ServerMapper.deleteServer(serverId);
 	}
 
+	@Override
+	public List<Server> searchServer(String keyWord) {
+		ArrayList<String> keyWordList = new ArrayList<String>();
+		keyWordList = UtilMethods.fenci(keyWord);
+		keyWordList = UtilMethods.doSomething(keyWordList);
+		String sql = UtilMethods.creatSql(keyWordList);
+		return ServerMapper.searchServer(sql);
+	}
+	
+	
 
 
 }

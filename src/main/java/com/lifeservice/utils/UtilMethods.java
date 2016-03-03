@@ -7,8 +7,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
+import org.ansj.domain.Term;
+import org.ansj.splitWord.analysis.ToAnalysis;
 import org.apache.log4j.Logger;
 
 
@@ -16,6 +22,7 @@ import org.apache.log4j.Logger;
 public class UtilMethods {
 	private static Logger log = Logger.getLogger(UtilMethods.class);
 	public final static double EARTH_RADIUS_KM = 6378.137;
+	static String[] dictionary = { "的", "地", "是" ,"要",".",","};
 	/**
 	 * 字符串MD5加密
 	 */
@@ -117,5 +124,53 @@ public class UtilMethods {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * 汉字分词
+	 * @param str
+	 * @return
+	 */
+	public static ArrayList<String> fenci(String str){
+		LinkedList<Term> list = (LinkedList) ToAnalysis.parse(str);
+		ArrayList<String> arrayList = new ArrayList<String>();
+		for (Term m : list) {
+			System.out.println(m.getName());
+			arrayList.add(m.getName());
+		}
+		return arrayList;
+		
+	}
+	
+	/**
+	 * 去除语气词
+	 * @param list
+	 * @return
+	 */
+	public static ArrayList<String> doSomething(ArrayList<String> list){
+		Set<String> hashSet = new HashSet<String>();
+		hashSet.addAll(list);
+		ArrayList<String> keyWords = new ArrayList<String>();
+		for (Object a : hashSet) {
+			keyWords.add(a.toString());
+		}
+		for (String aString : dictionary) {
+			if (keyWords.contains(aString)) {
+				keyWords.remove(aString);
+			}
+		}
+		return keyWords;
+	}
+	
+	public static String creatSql(ArrayList<String> list){
+		StringBuilder str = new StringBuilder();
+		str.append("(SELECT * FROM server where KeyWord LIKE '%"+list.get(0)+"%') as emp0 ") ;
+		list.remove(0);
+		for(int i = 0;i<list.size();i++) {
+			str.insert(0,"(SELECT * FROM ");
+			str.insert(str.length(),"WHERE emp"+i+".KeyWord LIKE '%"+list.get(i)+"%') as emp"+(i+1)+" ");
+		}
+		String string = str.toString();
+		return string.substring(1,string.length()-10);
 	}
 }

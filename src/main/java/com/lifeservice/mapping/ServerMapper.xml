@@ -99,7 +99,10 @@
 		#{city,jdbcType=VARCHAR},
 		#{memo,jdbcType=VARCHAR}
 	</update>
-
+	
+	<select id="searchServer" resultMap="BaseResultMap"  statementType="STATEMENT">
+		${sql} 
+	</select>
 
 
 </mapper>
