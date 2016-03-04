@@ -36,13 +36,16 @@ public class PositionalController {
 	private ServerService serverService;
 	
 	@RequestMapping(value = "/savePosition", method = { RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
 	public void savePosition(PositionInfo positionInfo) throws ParseException{
 		
 		//Map<String, Object> result = new HashMap<String, Object>();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		positionInfo.setUpdateTime(UtilMethods.stringToDate(df.format(new Date())));
 		try {
-			if(userService.findUserByUserId(positionInfo.getUserId()) != null){
+			PositionInfo hasPositionInfo = positionService.getPositionInfoByUserId(positionInfo.getUserId());
+			if(hasPositionInfo != null){
+				positionInfo.setPositionId(hasPositionInfo.getPositionId());
 				positionService.updatePosition(positionInfo);;
 			}else{
 				positionService.savePosition(positionInfo);
