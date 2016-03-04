@@ -45,15 +45,15 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.lifeservice.model.UserInfo" useGeneratedKeys="true" keyProperty="id">
-		insert into userinfo (<include refid="Base_Column_List" />)
+		insert into userinfo (userName, userPassword, phone, realName, needs, provide, province, city, memo)
 		values (#{userName,jdbcType=VARCHAR},
 		#{userPassword,jdbcType=VARCHAR},
-		#{phone,jdbcType=VARCHAR})
-		#{realName,jdbcType=VARCHAR})
-		#{needs,jdbcType=VARCHAR})
-		#{provide,jdbcType=VARCHAR})
-		#{province,jdbcType=VARCHAR})
-		#{city,jdbcType=VARCHAR})
+		#{phone,jdbcType=VARCHAR},
+		#{realName,jdbcType=VARCHAR},
+		#{needs,jdbcType=VARCHAR},
+		#{provide,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
 		#{memo,jdbcType=VARCHAR})
 	</insert>
 	
