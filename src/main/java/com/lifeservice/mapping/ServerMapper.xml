@@ -26,18 +26,17 @@
 	</sql>
 	
 	<insert id="addServer" parameterType="com.lifeservice.model.Server" useGeneratedKeys="true" keyProperty="id">
-		insert into server (<include refid="Base_Column_List" />)
+		insert into server (userId,serverName,serverContent,type,keyWord,updateTime,jingDu,weiDu,province,city)
 		values (#{userId,jdbcType=INTEGER},
 		#{serverName,jdbcType=VARCHAR},
-		#{serverContent,jdbcType=VARCHAR})
-		#{type,jdbcType=VARCHAR})
-		#{keyWord,jdbcType=VARCHAR})
-		#{updateTime,jdbcType=TIMESTAMP})
-		#{jingDu,jdbcType=FLOAT})
-		#{weiDu,jdbcType=FLOAT})
-		#{province,jdbcType=VARCHAR})
+		#{serverContent,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{keyWord,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{jingDu,jdbcType=FLOAT},
+		#{weiDu,jdbcType=FLOAT},
+		#{province,jdbcType=VARCHAR},
 		#{city,jdbcType=VARCHAR})
-		#{memo,jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
