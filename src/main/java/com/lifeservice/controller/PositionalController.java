@@ -46,7 +46,7 @@ public class PositionalController {
 			PositionInfo hasPositionInfo = positionService.getPositionInfoByUserId(positionInfo.getUserId());
 			if(hasPositionInfo != null){
 				positionInfo.setPositionId(hasPositionInfo.getPositionId());
-				positionService.updatePosition(positionInfo);;
+				positionService.updatePosition(positionInfo);
 			}else{
 				positionService.savePosition(positionInfo);
 			}
