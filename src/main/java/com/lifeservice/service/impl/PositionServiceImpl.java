@@ -13,7 +13,6 @@ public class PositionServiceImpl implements PositionService{
 
 	@Override
 	public void savePosition(PositionInfo positionInfo) {
-		// TODO Auto-generated method stub
 		
 	}
 
