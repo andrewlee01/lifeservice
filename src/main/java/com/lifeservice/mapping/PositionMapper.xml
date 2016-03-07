@@ -7,7 +7,7 @@
 		<id column="positionId" property="positionId" jdbcType="INTEGER" />
 		<result column="userId" property="userId" jdbcType="INTEGER" />
 		<result column="jingDu" property="jingDu" jdbcType="FLOAT" />
-		<result column="weiDu" property="phone" jdbcType="FLOAT" />
+		<result column="weiDu" property="weiDu" jdbcType="FLOAT" />
 		<result column="updateTime" property="updateTime" jdbcType="DATE" />
 		<result column="province" property="province" jdbcType="VARCHAR" />
 		<result column="city" property="city" jdbcType="VARCHAR" />
@@ -26,26 +26,26 @@
 		where userId = #{userId,jdbcType=INTEGER}
 	</select>
 	
-	<update id="updateUser" parameterType="com.lifeservice.model.PositionInfo">
+	<update id="updatePositional" parameterType="com.lifeservice.model.PositionInfo">
 		update position
 		<set>
 				<if test = "userId != null">
-					userId = #{userId,jdbcType=INTEGER}
+					userId = #{userId,jdbcType=INTEGER},
 				</if>
 				<if test = "jingDu != null">
-					jingDu = #{jingDu,jdbcType=FLOAT}
+					jingDu = #{jingDu,jdbcType=FLOAT},
 				</if>
 				<if test = "weiDu != null">
-					weiDu = #{weiDu,jdbcType=FLOAT}
+					weiDu = #{weiDu,jdbcType=FLOAT},
 				</if>
 				<if test = "updateTime != null">
-					updateTime = #{updateTime,jdbcType=TIMESTAMP}
+					updateTime = #{updateTime,jdbcType=TIMESTAMP},
 				</if>
 				<if test = "province != null">
-					province = #{province,jdbcType=VARCHAR}
+					province = #{province,jdbcType=VARCHAR},
 				</if>
 				<if test = "city != null">
-					city = #{city,jdbcType=VARCHAR}
+					city = #{city,jdbcType=VARCHAR},
 				</if>
 				<if test = "memo != null">
 					memo = #{memo,jdbcType=VARCHAR}
@@ -66,10 +66,10 @@
 		insert into position (userId, jingDu, weiDu, updateTime, province, city, memo)
 		values (#{userId,jdbcType=INTEGER},
 		#{jingDu,jdbcType=FLOAT},
-		#{weiDu,jdbcType=FLOAT})
-		#{updateTime,jdbcType=TIMESTAMP})
-		#{province,jdbcType=VARCHAR})
-		#{city,jdbcType=VARCHAR})
+		#{weiDu,jdbcType=FLOAT},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
 		#{memo,jdbcType=VARCHAR})
 	</insert>
 

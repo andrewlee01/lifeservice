@@ -34,7 +34,7 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/addUser", method = { RequestMethod.POST, RequestMethod.GET } )
 	public @ResponseBody Map<String, Object> addUser(UserInfo userinfo){
 		Map<String, Object> result = new HashMap<String, Object>();
 		if (userinfo.getUserName() == "" || userinfo.getUserPassword() == ""

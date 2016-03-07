@@ -11,7 +11,7 @@ public interface PositionService {
 	
 	void savePosition(PositionInfo positionInfo);
 	
-	boolean isHasPositionInfo(int userId);
+	PositionInfo getPositionInfoByUserId(int userId);
 	
 	void updatePosition(PositionInfo positionInfo);
 	
