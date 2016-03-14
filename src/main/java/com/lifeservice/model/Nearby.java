@@ -1,5 +1,7 @@
 package com.lifeservice.model;
 
+import java.util.Date;
+
 public class Nearby {
 	/**
 	 * 用户Id
@@ -37,6 +39,10 @@ public class Nearby {
 	 * 用户纬度
 	 */
 	private float weiDu;
+	/**
+	 * 更新时间
+	 */
+	private Date updateTime;
 	
 	
 	public int getUserId() {
@@ -92,6 +98,12 @@ public class Nearby {
 	}
 	public void setWeiDu(float weiDu) {
 		this.weiDu = weiDu;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 	
 	
