@@ -12,7 +12,7 @@ public class Server {
 	private Date updateTime;
 	private float jingDu;
 	private float weiDu;
-	private String province;
+	//private String province;
 	private String city;
 	private String memo;
 	public String getServerId() {
@@ -68,12 +68,6 @@ public class Server {
 	}
 	public void setWeiDu(float weiDu) {
 		this.weiDu = weiDu;
-	}
-	public String getProvince() {
-		return province;
-	}
-	public void setProvince(String province) {
-		this.province = province;
 	}
 	public String getCity() {
 		return city;

@@ -15,18 +15,17 @@
 		<result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
 		<result column="jingDu" property="jingDu" jdbcType="FLOAT" />
 		<result column="weiDu" property="weiDu" jdbcType="FLOAT" />
-		<result column="province" property="province" jdbcType="VARCHAR" />
 		<result column="city" property="city" jdbcType="VARCHAR" />
 		<result column="memo" property="memo" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
 		serverId, userId, serverName, serverContent, type, keyWord,
-		updateTime, jingDu, weiDu, province, city, memo
+		updateTime, jingDu, weiDu, city, memo
 	</sql>
 	
 	<insert id="addServer" parameterType="com.lifeservice.model.Server" useGeneratedKeys="true" keyProperty="id">
-		insert into server (userId,serverName,serverContent,type,keyWord,updateTime,jingDu,weiDu,province,city)
+		insert into server (userId,serverName,serverContent,type,keyWord,updateTime,jingDu,weiDu,city)
 		values (#{userId,jdbcType=INTEGER},
 		#{serverName,jdbcType=VARCHAR},
 		#{serverContent,jdbcType=VARCHAR},
@@ -35,7 +34,6 @@
 		#{updateTime,jdbcType=TIMESTAMP},
 		#{jingDu,jdbcType=FLOAT},
 		#{weiDu,jdbcType=FLOAT},
-		#{province,jdbcType=VARCHAR},
 		#{city,jdbcType=VARCHAR})
 	</insert>
 	
@@ -94,7 +92,6 @@
 		#{updateTime,jdbcType=TIMESTAMP},
 		#{jingDu,jdbcType=FLOAT},
 		#{weiDu,jdbcType=FLOAT},
-		#{province,jdbcType=VARCHAR},
 		#{city,jdbcType=VARCHAR},
 		#{memo,jdbcType=VARCHAR}
 	</update>

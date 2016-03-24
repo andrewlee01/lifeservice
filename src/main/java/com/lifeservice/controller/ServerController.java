@@ -36,7 +36,7 @@ public class ServerController {
 		
 	}
 	
-	@RequestMapping(value = "/addServer", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/addServer", method = { RequestMethod.POST})
 	public @ResponseBody Map<String, Object> addServer(Server server) throws Exception{
 		try {
 			serverService.addServer(server);
