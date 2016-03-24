@@ -15,9 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import redis.clients.jedis.Jedis;
+
 import com.lifeservice.model.UserImage;
 import com.lifeservice.model.UserInfo;
 import com.lifeservice.service.UserService;
+import com.lifeservice.utils.RandomUtils;
+import com.lifeservice.utils.RedisUtil;
+import com.lifeservice.utils.SMSUtils;
 import com.lifeservice.utils.UtilMethods;
 
 @Controller
@@ -25,6 +30,9 @@ import com.lifeservice.utils.UtilMethods;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	public RedisUtil redisUtil;
 
 	public UserService getUserService() {
 		return userService;
@@ -146,5 +154,48 @@ public class UserController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "/sendIdentify", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Map<String, Object> sendIdentify(String phoneNum){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			String identifyCode = RandomUtils.generateNumberString(6);   //随机生成6位数字验证码
+			Jedis jedis = redisUtil.createRedis();
+			jedis.set(phoneNum, identifyCode);
+			// 设置 key的过期时间
+	        System.out.println("设置手机号:"+phoneNum+"的验证码过期时间为15分钟:"+jedis.expire(phoneNum, 900));
+	        boolean isSuccess;
+	        do{
+	        	isSuccess = SMSUtils.sendSms(phoneNum, identifyCode);
+	        }while(!isSuccess);
+	        result.put("result", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("result", "fail");
+		}
+		return result;
+	}
+	
+	
+	@RequestMapping(value = "/verify", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Map<String, Object> verify(String phoneNum, String identifyCode){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			Jedis jedis = redisUtil.createRedis();
+			String code = jedis.get("phoneNum");
+			if(code == null || code == ""){
+				result.put("result", "fail");
+			}
+			if(code.equals(identifyCode)){
+				result.put("result", "success");
+				System.out.println("系统中删除电话号码为:"+phoneNum+"的KEY "+jedis.del(phoneNum));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("result", "fail");
+		}
+		return result;
+		
 	}
 }

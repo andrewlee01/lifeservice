@@ -82,11 +82,20 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.2</version>
 		</dependency>
+		<!-- <dependency> <groupId>com.alibaba</groupId> <artifactId>fastjson</artifactId> 
+			<version>1.1.37</version> </dependency> -->
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.1.37</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140504</version>
 		</dependency>
+
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>0.7.1</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -108,6 +117,18 @@
 			<groupId>org.ansj</groupId>
 			<artifactId>ansj_seg</artifactId>
 			<version>0.9</version>
+		</dependency>
+
+		<!-- redis -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.1.0</version>
 		</dependency>
 
 	</dependencies>
