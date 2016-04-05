@@ -93,6 +93,9 @@ public class PositionalController {
 				UserInfo userInfo = userService.findUserByUserId(userId);
 				//List<Userinfo>  userList  = positionalService.getNearByUserByUserId(userId);
 				List<Server> serverList =  serverService.findServerListByUserId(userId);
+				if(serverList == null || serverList.size() == 0){
+					continue;
+				}
 				nearby.setUserId(userId);
 				nearby.setProvide(serverList.get(0).getServerName());
 				nearby.setTouXiangPath(userInfo.getMemo());
@@ -109,7 +112,6 @@ public class PositionalController {
 			}
 			result.put("nearby", nearByList);
 		}
-		
 		return result;
 		
 	}
