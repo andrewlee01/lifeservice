@@ -9,7 +9,7 @@ public class Server {
 	private String serverContent;
 	private String type;
 	private String keyWord;
-	private Date updateTime;
+	private String updateTime;
 	private float jingDu;
 	private float weiDu;
 	//private String province;
@@ -51,10 +51,10 @@ public class Server {
 	public void setKeyWord(String keyWord) {
 		this.keyWord = keyWord;
 	}
-	public Date getUpdateTime() {
+	public String getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
 	public float getJingDu() {

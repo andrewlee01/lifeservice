@@ -29,7 +29,7 @@
 		userId, userName, userPassword, phone, realName, needs, provide, province, city, memo
 	</sql>
 	<select id="selectByUserName" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
+		parameterType="java.lang.String" useCache="false">
 		select
 		<include refid="Base_Column_List" />
 		from userinfo
@@ -37,7 +37,7 @@
 	</select>
 	
 	<select id="selectByUserId" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
+		parameterType="java.lang.Integer" useCache="false">
 		select
 		<include refid="Base_Column_List" />
 		from userinfo

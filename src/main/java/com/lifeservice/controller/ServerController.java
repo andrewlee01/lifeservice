@@ -4,6 +4,7 @@ package com.lifeservice.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lifeservice.model.SearchServer;
 import com.lifeservice.model.Server;
 import com.lifeservice.model.UserInfo;
 import com.lifeservice.service.ServerService;
@@ -28,7 +30,7 @@ public class ServerController {
 	
 	Map<String,Object> result = new HashMap<String,Object>(); //返回集合
 	
-	@RequestMapping(value = "/findServerByUserId", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/findServerByUserId", method = {RequestMethod.GET })
 	public @ResponseBody Map<String,Object> findServerByUserId(int userId) throws Exception{
 		List<Server> serverList = serverService.findServerListByUserId(userId);
 		result.put("serverList", serverList);
@@ -106,12 +108,13 @@ public class ServerController {
 	
 
 	@RequestMapping(value = "/searchServer", method = { RequestMethod.POST, RequestMethod.GET })
-	public @ResponseBody Map<String, Object> searchServer(String keyWord){
-		
+	public @ResponseBody Map<String, Object> searchServer(String KeyWord,float jingDu, float weiDu){
+		TreeSet<SearchServer> set = new TreeSet<SearchServer>();
 		try {
-			List<Server> serverList = serverService.searchServer(keyWord);
+			List<Server> serverList = serverService.searchServer(KeyWord);
+			set=serverService.orderServerList(serverList, jingDu, weiDu);
 			result.put("result", "success");
-			result.put("serverList", serverList);
+			result.put("searchServer", set);
 		} catch (Exception e) {
 			result.put("result", "fail");
 			e.printStackTrace();

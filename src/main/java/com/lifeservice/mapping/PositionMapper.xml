@@ -19,7 +19,7 @@
 	</sql>
 	
 	<select id="findPositionByUserId" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
+		parameterType="java.lang.Integer" useCache="false">
 		select
 		<include refid="Base_Column_List" />
 		from position
@@ -55,7 +55,7 @@
 	</update>
 	
 	<select id="getPositionByCity" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
+		parameterType="java.lang.String" useCache="false">
 		select
 		<include refid="Base_Column_List" />
 		from position

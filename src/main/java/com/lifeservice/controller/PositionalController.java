@@ -105,7 +105,7 @@ public class PositionalController {
 				nearby.setUserName(userInfo.getUserName());
 				nearby.setJingDu(serverList.get(0).getJingDu());
 				nearby.setWeiDu(serverList.get(0).getWeiDu());
-				nearby.setUpdateTime(serverList.get(0).getUpdateTime());
+				//nearby.setUpdateTime(serverList.get(0).getUpdateTime());
 				nearByList.add(nearby);
 				
 				

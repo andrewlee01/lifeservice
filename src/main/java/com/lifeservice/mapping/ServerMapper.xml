@@ -25,19 +25,20 @@
 	</sql>
 	
 	<insert id="addServer" parameterType="com.lifeservice.model.Server" useGeneratedKeys="true" keyProperty="id">
-		insert into server (userId,serverName,serverContent,type,keyWord,updateTime,jingDu,weiDu,city)
+		insert into server (userId,serverName,serverContent,type,keyWord,updateTime,jingDu,weiDu,city,memo)
 		values (#{userId,jdbcType=INTEGER},
 		#{serverName,jdbcType=VARCHAR},
 		#{serverContent,jdbcType=VARCHAR},
 		#{type,jdbcType=VARCHAR},
 		#{keyWord,jdbcType=VARCHAR},
-		#{updateTime,jdbcType=TIMESTAMP},
+		now(),
 		#{jingDu,jdbcType=FLOAT},
 		#{weiDu,jdbcType=FLOAT},
-		#{city,jdbcType=VARCHAR})
+		#{city,jdbcType=VARCHAR},
+		1)
 	</insert>
 	
-	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" useCache="false">
 		select
 		<include refid="Base_Column_List" />
 		from server
@@ -49,14 +50,14 @@
 	</delete>
 
 	<select id="findServerListByUserId" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
+		parameterType="java.lang.Integer" useCache="false">
 		select
 		<include refid="Base_Column_List" />
 		from server
 		where userId = #{userId,jdbcType=INTEGER}
 	</select>
 
-	<select id="findServerListByUserIdAndStatus" parameterType="java.lang.Integer">
+	<select id="findServerListByUserIdAndStatus" parameterType="java.lang.Integer" useCache="false">
 		select
 		<include refid="Base_Column_List" />
 		from server
@@ -96,7 +97,7 @@
 		#{memo,jdbcType=VARCHAR}
 	</update>
 	
-	<select id="searchServer" resultMap="BaseResultMap"  statementType="STATEMENT">
+	<select id="searchServer" resultMap="BaseResultMap"  statementType="STATEMENT" useCache="false">
 		${sql} 
 	</select>
 

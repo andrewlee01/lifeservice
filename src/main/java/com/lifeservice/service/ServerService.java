@@ -1,11 +1,9 @@
 package com.lifeservice.service;
 
 import java.util.List;
+import java.util.TreeSet;
 
-
-
-import org.apache.ibatis.annotations.Param;
-
+import com.lifeservice.model.SearchServer;
 import com.lifeservice.model.Server;
 
 public interface ServerService {
@@ -27,5 +25,9 @@ public interface ServerService {
 	void deleteServer(int serverId);
 	
 	List<Server> searchServer(String keyWord);
+	
+	public TreeSet<SearchServer> orderServerList(List<Server> serverList,float lon,float lat);
+	
+	public List<Server> updateServerPosition(List<Server> serverList);
 	
 }

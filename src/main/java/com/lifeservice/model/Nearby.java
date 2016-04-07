@@ -42,7 +42,7 @@ public class Nearby {
 	/**
 	 * 更新时间
 	 */
-	private Date updateTime;
+	//private String updateTime;
 	
 	
 	public int getUserId() {
@@ -98,12 +98,6 @@ public class Nearby {
 	}
 	public void setWeiDu(float weiDu) {
 		this.weiDu = weiDu;
-	}
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
 	}
 	
 	
