@@ -92,7 +92,7 @@ public class PositionalController {
 				
 				UserInfo userInfo = userService.findUserByUserId(userId);
 				//List<Userinfo>  userList  = positionalService.getNearByUserByUserId(userId);
-				List<Server> serverList =  serverService.findServerListByUserId(userId);
+				List<Server> serverList =  serverService.findServerListByUserId(userId,1);
 				if(serverList == null || serverList.size() == 0){
 					continue;
 				}

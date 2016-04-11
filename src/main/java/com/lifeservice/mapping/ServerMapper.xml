@@ -55,6 +55,9 @@
 		<include refid="Base_Column_List" />
 		from server
 		where userId = #{userId,jdbcType=INTEGER}
+		<if test ="type == 1">
+			 AND memo = 1
+		</if>
 	</select>
 
 	<select id="findServerListByUserIdAndStatus" parameterType="java.lang.Integer" useCache="false">

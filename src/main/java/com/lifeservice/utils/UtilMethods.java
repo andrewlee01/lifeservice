@@ -164,11 +164,11 @@ public class UtilMethods {
 	
 	public static String creatSql(ArrayList<String> list){
 		StringBuilder str = new StringBuilder();
-		str.append("(SELECT * FROM server where KeyWord LIKE '%"+list.get(0)+"%') as emp0 ") ;
+		str.append("(SELECT * FROM server where KeyWord LIKE '%"+list.get(list.size() - 1)+"%' AND memo = 1) as emp0 ") ;
 		list.remove(0);
-		for(int i = 0;i<list.size();i++) {
+		for(int i = list.size() - 1;i>= 0;i--) {
 			str.insert(0,"(SELECT * FROM ");
-			str.insert(str.length(),"WHERE emp"+i+".KeyWord LIKE '%"+list.get(i)+"%') as emp"+(i+1)+" ");
+			str.insert(str.length(),"WHERE emp"+i+".KeyWord LIKE '%"+list.get(i)+"%' AND memo = 1) as emp"+(i+1)+" ");
 		}
 		String string = str.toString();
 		return string.substring(1,string.length()-10);

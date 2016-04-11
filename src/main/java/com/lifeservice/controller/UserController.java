@@ -167,7 +167,9 @@ public class UserController {
 	        System.out.println("设置手机号:"+phoneNum+"的验证码过期时间为15分钟:"+jedis.expire(phoneNum, 900));
 	        boolean isSuccess;
 	        do{
-	        	isSuccess = SMSUtils.sendSms(phoneNum, identifyCode);
+	        	//isSuccess = SMSUtils.sendSms(phoneNum, identifyCode);
+	        	System.out.println("phoneNum="+phoneNum + "identifyCode = " + identifyCode);
+	        	isSuccess = true;
 	        }while(!isSuccess);
 	        result.put("result", "success");
 		} catch (Exception e) {
@@ -183,7 +185,7 @@ public class UserController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Jedis jedis = redisUtil.createRedis();
-			String code = jedis.get("phoneNum");
+			String code = jedis.get(phoneNum);
 			if(code == null || code == ""){
 				result.put("result", "fail");
 			}

@@ -33,7 +33,7 @@ public interface ServerMapper {
 	 * @param userId
 	 * @return
 	 */
-	List<Server> findServerListByUserId(int userId);
+	List<Server> findServerListByUserId(@Param("userId") int userId,@Param("type") int type);
 	
 	/**
 	 * 根据UserId和服务状态获取服务
@@ -49,7 +49,7 @@ public interface ServerMapper {
 	 * @param status
 	 * 	 0 无效 ，1 有效
 	 */
-	void updateServerStatus(int serverId, @Param("memo")int status);
+	void updateServerStatus(@Param("serverId") int serverId, @Param("memo")int status);
 	
 	/**
 	 * 更新服务内容

@@ -52,8 +52,8 @@ public class ServerServiceImpl implements ServerService{
 	}
 	
 	@Override
-	public List<Server> findServerListByUserId(int userId) {
-		return ServerMapper.findServerListByUserId(userId);
+	public List<Server> findServerListByUserId(int userId,int type) {
+		return ServerMapper.findServerListByUserId(userId,type);
 	}
 
 	@Override
@@ -62,8 +62,8 @@ public class ServerServiceImpl implements ServerService{
 	}
 	
 	@Override
-	public void updateServerStatus(int serverId, int status) {
-		ServerMapper.updateServerStatus(serverId, status);
+	public void updateServerStatus(int serverId, int memo) {
+		ServerMapper.updateServerStatus(serverId, memo);
 	}
 
 	@Override

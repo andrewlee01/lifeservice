@@ -32,7 +32,7 @@ public class ServerController {
 	
 	@RequestMapping(value = "/findServerByUserId", method = {RequestMethod.GET })
 	public @ResponseBody Map<String,Object> findServerByUserId(int userId) throws Exception{
-		List<Server> serverList = serverService.findServerListByUserId(userId);
+		List<Server> serverList = serverService.findServerListByUserId(userId,0);
 		result.put("serverList", serverList);
 		return result;
 		
@@ -73,7 +73,7 @@ public class ServerController {
 	
 	@RequestMapping(value = "/userAndServerList", method = { RequestMethod.POST, RequestMethod.GET })
 	public @ResponseBody Map<String,Object> userAndServerList(int userId){
-		List<Server> serverList=serverService.findServerListByUserId(userId);
+		List<Server> serverList=serverService.findServerListByUserId(userId,1);
 		UserInfo user=userService.findUserByUserId(userId);
 		result.put("user", user);
 		result.put("serverList", serverList);

@@ -16,7 +16,7 @@ public interface ServerService {
 	
 	void updateServer(Server server);
 	
-	List<Server> findServerListByUserId(int userId);
+	List<Server> findServerListByUserId(int userId,int type);
 	
 	List<Server> findServerListByUserIdAndStatus(int userId,int status);
 	
