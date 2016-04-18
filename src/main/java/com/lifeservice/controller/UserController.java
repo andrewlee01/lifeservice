@@ -167,7 +167,7 @@ public class UserController {
 	        System.out.println("设置手机号:"+phoneNum+"的验证码过期时间为15分钟:"+jedis.expire(phoneNum, 900));
 	        boolean isSuccess;
 	        do{
-	        	//isSuccess = SMSUtils.sendSms(phoneNum, identifyCode);
+	        	isSuccess = SMSUtils.sendSms(phoneNum, identifyCode);
 	        	System.out.println("phoneNum="+phoneNum + "identifyCode = " + identifyCode);
 	        	isSuccess = true;
 	        }while(!isSuccess);
