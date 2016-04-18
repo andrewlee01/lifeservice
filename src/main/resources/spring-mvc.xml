@@ -6,8 +6,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 http://www.springframework.org/schema/mvc 
 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
+
+	<!--   静态资源定义  -->
+	<mvc:resources mapping="/upload/**" location="/upload/"/>
 	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
 	<context:component-scan base-package="com.lifeservice.controller" />
+	<!-- 开启注解 -->
+	<mvc:annotation-driven/>
 
 	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
@@ -38,9 +43,11 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="maxUploadSize">
 			<value>32505856</value><!-- 上传文件大小限制为31M，31*1024*1024 -->
 		</property>
-		<property name="maxInMemorySize">
+		<!-- <property name="maxInMemorySize">
 			<value>4096</value>
-		</property>
+		</property> -->
 	</bean>
+	
+	
 
 </beans>
