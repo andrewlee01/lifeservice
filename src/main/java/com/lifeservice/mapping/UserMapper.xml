@@ -74,6 +74,14 @@
 		where userId = #{userId}
 	</update>
 	
+	<select id="selectByPhone" resultMap="BaseResultMap"
+		parameterType="java.lang.String" useCache="false">
+		select
+		<include refid="Base_Column_List" />
+		from userinfo
+		where phone = #{phone,jdbcType=STRING}
+	</select>
+	
 <!-- 	<insert id="insertSelective" parameterType="com.lifeservice.model.User"> -->
 <!-- 		insert into user -->
 <!-- 		<trim prefix="(" suffix=")" suffixOverrides=","> -->

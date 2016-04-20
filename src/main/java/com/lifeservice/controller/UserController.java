@@ -160,25 +160,34 @@ public class UserController {
 			RequestMethod.GET })
 	public @ResponseBody Map<String, Object> sendIdentify(String phoneNum) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		try {
-			String identifyCode = RandomUtils.generateNumberString(6); // 随机生成6位数字验证码
-			Jedis jedis = redisUtil.createRedis();
-			jedis.set(phoneNum, identifyCode);
-			// 设置 key的过期时间
-			System.out.println("设置手机号:" + phoneNum + "的验证码过期时间为15分钟:"
-					+ jedis.expire(phoneNum, 900));
-			boolean isSuccess;
-			do {
-				isSuccess = SMSUtils.sendSms(phoneNum, identifyCode);
-				System.out.println("phoneNum=" + phoneNum + "identifyCode = "
-						+ identifyCode);
-				isSuccess = true;
-			} while (!isSuccess);
-			result.put("result", "success");
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("result", "fail");
+		
+		//手机号判重
+		UserInfo userInfo = userService.findUserByPhone(phoneNum);
+		
+		if(userInfo != null){
+			result.put("result", "repeat");
+		}else{
+			try {
+				String identifyCode = RandomUtils.generateNumberString(6); // 随机生成6位数字验证码
+				Jedis jedis = redisUtil.createRedis();
+				jedis.set(phoneNum, identifyCode);
+				// 设置 key的过期时间
+				System.out.println("设置手机号:" + phoneNum + "的验证码过期时间为15分钟:"
+						+ jedis.expire(phoneNum, 900));
+				boolean isSuccess;
+				do {
+					isSuccess = SMSUtils.sendSms(phoneNum, identifyCode);
+					System.out.println("phoneNum=" + phoneNum + "identifyCode = "
+							+ identifyCode);
+					isSuccess = true;
+				} while (!isSuccess);
+				result.put("result", "success");
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.put("result", "fail");
+			}
 		}
+		
 		return result;
 	}
 

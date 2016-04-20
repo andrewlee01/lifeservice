@@ -36,4 +36,11 @@ public interface UserService {
 	 *  更新的值
 	 */
 	public String updateUser(int userId, String key, String value);
+	
+	/**
+	 * 根据电话号码查询UserInfo
+	 * @param phoneNum
+	 * @return
+	 */
+	public UserInfo findUserByPhone(String phoneNum);
 }

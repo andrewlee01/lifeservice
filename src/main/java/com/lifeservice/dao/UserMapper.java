@@ -14,4 +14,6 @@ public interface UserMapper {
     UserInfo selectByUserId(int userId);
     
     void updateUser(@Param("userId")int userId,@Param("key")String key,@Param("value")String value);
+    
+    UserInfo selectByPhone(String phone);
 }

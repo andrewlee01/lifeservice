@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService {
 		userMapper.updateUser(userId, key, value);
 		return "success";
 	}
+
+	@Override
+	public UserInfo findUserByPhone(String phoneNum) {
+		return userMapper.selectByPhone(phoneNum);
+	}
 	
 	
 
