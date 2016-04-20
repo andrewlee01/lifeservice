@@ -1,6 +1,7 @@
 package com.lifeservice.controller;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,9 +21,11 @@ import redis.clients.jedis.Jedis;
 
 import com.lifeservice.model.UserInfo;
 import com.lifeservice.service.UserService;
+import com.lifeservice.utils.Constant;
 import com.lifeservice.utils.RandomUtils;
 import com.lifeservice.utils.RedisUtil;
 import com.lifeservice.utils.SMSUtils;
+import com.lifeservice.utils.UtilMethods;
 
 @Controller
 @RequestMapping("/user")
@@ -60,6 +63,10 @@ public class UserController {
 				result.put("reason", "1");
 				return result;
 			} else {
+				//对密码进行加密处理
+				String pwd = userinfo.getUserPassword() + Constant.slat;
+				userinfo.setUserPassword(UtilMethods.encryptMD5(pwd));
+				
 				userService.addUser(userinfo);
 				result.put("result", "success");
 				return result;
@@ -123,23 +130,41 @@ public class UserController {
 			RequestMethod.GET })
 	public @ResponseBody Map<String, Object> userLogin(String userName,
 			String userPassword) {
-
+		int count = 0;
+		long time = 0;
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		if (userName != null && userPassword != null) {
-
+			
 			UserInfo userInfo = userService.findUserByUsername(userName);
-
+			
 			if (userInfo != null) {
-
-				if (userInfo.getUserPassword().equals(userPassword)) {
-					result.put("result", "success");
-					result.put("userId", userInfo.getUserId());
-				} else {
+				Calendar c1 = Calendar.getInstance();
+				System.out.println(c1.getTimeInMillis());
+				System.out.println(UtilMethods.fromDateStringToLong(UtilMethods.dqsj()));
+				System.out.println(UtilMethods.fromDateStringToLong(userInfo.getLastLoginTime()));
+				time = (int) (UtilMethods.fromDateStringToLong(UtilMethods.dqsj()) - UtilMethods.fromDateStringToLong(userInfo.getLastLoginTime()));
+				
+				if(userInfo.getCount() > 4 && (time/1000) < (60 * 60 * 6)){
 					result.put("result", "fail");
-					result.put("reason", "2");
+					result.put("reason", "3");
+				}else{
+					userService.updateUser(Integer.parseInt(userInfo.getUserId()), "last_logintime", UtilMethods.dqsj());
+					String pwd = UtilMethods.encryptMD5(userPassword + Constant.slat);
+					if (userInfo.getUserPassword().equals(pwd)) {
+						userService.updateUser(Integer.parseInt(userInfo.getUserId()), "count", "0");
+						result.put("result", "success");
+						result.put("userId", userInfo.getUserId());
+					} else {
+						count = userInfo.getCount() + 1;
+						userService.updateUser(Integer.parseInt(userInfo.getUserId()), "count", String.valueOf(count));
+						result.put("result", "fail");
+						result.put("reason", "2");
+					}
+					
 				}
-
+				
+				
 			} else {
 				result.put("result", "fail");
 				result.put("reason", "1");

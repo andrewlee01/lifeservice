@@ -1,5 +1,7 @@
 package com.lifeservice.model;
 
+import java.util.Date;
+
 public class UserInfo{
 	
 	private String userId;
@@ -12,6 +14,8 @@ public class UserInfo{
 	private String province;
 	private String city;
 	private String memo;
+	private String lastLoginTime;
+	private int count;
 	
 	
 	public String getUserId() {
@@ -74,4 +78,17 @@ public class UserInfo{
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	public String getLastLoginTime() {
+		return lastLoginTime;
+	}
+	public void setLastLoginTime(String lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
 }

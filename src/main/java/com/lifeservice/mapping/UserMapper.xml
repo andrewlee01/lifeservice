@@ -14,6 +14,8 @@
 		<result column="province" property="province" jdbcType="VARCHAR" />
 		<result column="city" property="city" jdbcType="VARCHAR" />
 		<result column="memo" property="memo" jdbcType="VARCHAR" />
+		<result column="last_logintime" property="lastLoginTime" jdbcType="DATE" />
+		<result column="count" property="count" jdbcType="INTEGER" />
 	</resultMap>
 
 <!-- 	<resultMap type="com.lifeservice.model.User" id="UserWithBooks" -->
@@ -26,7 +28,7 @@
 <!-- 	</resultMap> -->
 
 	<sql id="Base_Column_List">
-		userId, userName, userPassword, phone, realName, needs, provide, province, city, memo
+		userId, userName, userPassword, phone, realName, needs, provide, province, city, memo ,last_logintime , count
 	</sql>
 	<select id="selectByUserName" resultMap="BaseResultMap"
 		parameterType="java.lang.String" useCache="false">
@@ -45,7 +47,7 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.lifeservice.model.UserInfo" useGeneratedKeys="true" keyProperty="id">
-		insert into userinfo (userName, userPassword, phone, realName, needs, provide, province, city, memo)
+		insert into userinfo (userName, userPassword, phone, realName, needs, provide, province, city, memo ,last_logintime ,count)
 		values (#{userName,jdbcType=VARCHAR},
 		#{userPassword,jdbcType=VARCHAR},
 		#{phone,jdbcType=VARCHAR},
@@ -54,7 +56,9 @@
 		#{provide,jdbcType=VARCHAR},
 		#{province,jdbcType=VARCHAR},
 		#{city,jdbcType=VARCHAR},
-		#{memo,jdbcType=VARCHAR})
+		#{memo,jdbcType=VARCHAR},
+		now(),
+		#{count,jdbcType=INTEGER})
 	</insert>
 	
 	<update id="updateUser" >
@@ -79,7 +83,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from userinfo
-		where phone = #{phone,jdbcType=STRING}
+		where phone = #{phone,jdbcType=VARCHAR}
 	</select>
 	
 <!-- 	<insert id="insertSelective" parameterType="com.lifeservice.model.User"> -->
