@@ -7,6 +7,7 @@ import java.util.Random;
  * @Project:JUtils
  * @file:RandomUtils.java
  */
+@SuppressWarnings("unused")
 public class RandomUtils {
 	private static final String allChar = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
 	private static final String letterChar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; 

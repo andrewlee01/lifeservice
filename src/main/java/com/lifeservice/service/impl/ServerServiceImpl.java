@@ -16,7 +16,6 @@ import com.lifeservice.model.Server;
 import com.lifeservice.model.UserInfo;
 import com.lifeservice.service.ServerService;
 import com.lifeservice.utils.UtilMethods;
-import com.mysql.jdbc.Util;
 
 @Service("serverService")
 public class ServerServiceImpl implements ServerService{
