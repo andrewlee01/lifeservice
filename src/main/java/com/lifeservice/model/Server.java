@@ -1,6 +1,5 @@
 package com.lifeservice.model;
 
-import java.util.Date;
 
 public class Server {
 	private String serverId;
