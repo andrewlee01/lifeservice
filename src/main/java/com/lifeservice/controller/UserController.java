@@ -1,8 +1,6 @@
 package com.lifeservice.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +23,6 @@ import com.lifeservice.service.UserService;
 import com.lifeservice.utils.RandomUtils;
 import com.lifeservice.utils.RedisUtil;
 import com.lifeservice.utils.SMSUtils;
-import com.lifeservice.utils.UtilMethods;
 
 @Controller
 @RequestMapping("/user")
