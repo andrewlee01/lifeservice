@@ -191,4 +191,9 @@ public class UtilMethods {
 		   System.out.println("获得当前系统时间 "+today);  //显示
 		   return today;  //返回当前时间
 		  }
+	 
+	 public static String getDateStr(Date date, String formate) {
+			SimpleDateFormat sdf = new SimpleDateFormat(formate);
+			return sdf.format(date);
+		}
 }

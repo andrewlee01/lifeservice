@@ -2,6 +2,7 @@ package com.lifeservice.controller;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -141,9 +142,9 @@ public class UserController {
 			if (userInfo != null) {
 				Calendar c1 = Calendar.getInstance();
 				System.out.println(c1.getTimeInMillis());
-				System.out.println(UtilMethods.fromDateStringToLong(UtilMethods.dqsj()));
+				System.out.println(UtilMethods.fromDateStringToLong(UtilMethods.getDateStr(new Date(), "yyyy-MM-dd HH:mm:ss")));
 				System.out.println(UtilMethods.fromDateStringToLong(userInfo.getLastLoginTime()));
-				time = (int) (UtilMethods.fromDateStringToLong(UtilMethods.dqsj()) - UtilMethods.fromDateStringToLong(userInfo.getLastLoginTime()));
+				time = (int) (UtilMethods.fromDateStringToLong(UtilMethods.getDateStr(new Date(), "yyyy-MM-dd HH:mm:ss")) - UtilMethods.fromDateStringToLong(userInfo.getLastLoginTime()));
 				
 				if(userInfo.getCount() > 4 && (time/1000) < (60 * 60 * 6)){
 					result.put("result", "fail");
