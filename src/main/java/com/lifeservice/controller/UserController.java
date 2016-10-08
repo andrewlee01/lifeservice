@@ -91,6 +91,11 @@ public class UserController {
 	public @ResponseBody Map<String, Object> updateUser(int userId, String key,
 			String value) {
 		Map<String, Object> result = new HashMap<String, Object>();
+		if(key.equals("userPassword")){
+			//对密码进行加密处理
+			String pwd = value + Constant.slat;
+			value = (UtilMethods.encryptMD5(pwd));
+		}
 		result.put("result", userService.updateUser(userId, key, value));
 		return result;
 
@@ -150,7 +155,7 @@ public class UserController {
 					result.put("result", "fail");
 					result.put("reason", "3");
 				}else{
-					userService.updateUser(Integer.parseInt(userInfo.getUserId()), "last_logintime", UtilMethods.dqsj());
+					userService.updateUser(Integer.parseInt(userInfo.getUserId()), "last_logintime", UtilMethods.getDateStr(new Date(), "yyyy-MM-dd HH:mm:ss"));
 					String pwd = UtilMethods.encryptMD5(userPassword + Constant.slat);
 					if (userInfo.getUserPassword().equals(pwd)) {
 						userService.updateUser(Integer.parseInt(userInfo.getUserId()), "count", "0");
